@@ -15,6 +15,8 @@ logger = logging.getLogger("osparc-python-main")
 ENVIRONS = ["INPUT_FOLDER", "OUTPUT_FOLDER"]
 input_dir, output_dir = [Path(os.environ.get(v, None)) for v in ENVIRONS]
 
+# TODO: sync with schema in metadata!!
+OUTPUT_FILE = "output_data.zip"
 
 def copy(src, dest):
     try:
@@ -101,6 +103,10 @@ def setup():
 
     # TODO: snapshot_before = list(input_dir.rglob("*"))
 
+    # NOTE The inputs defined in ${INPUT_FOLDER}/inputs.json are available as env variables by their key in capital letters
+    # For example: input_1 -> $INPUT_1
+    #
+
     logger.info("Processing input ...")
     unzip_dir(input_dir)
 
@@ -150,7 +156,7 @@ def teardown():
 
     # TODO: sync zipped name with docker/labels/outputs.json
     with tempfile.TemporaryDirectory() as tmpdir:
-        zipped_file = Path(f"{tmpdir}/output_data.zip")
+        zipped_file = Path(f"{tmpdir}/{OUTPUT_FILE}")
         with zipfile.ZipFile(str(zipped_file), "w", zipfile.ZIP_DEFLATED) as zh:
             zipdir(output_dir, zh)
 
