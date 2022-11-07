@@ -46,7 +46,7 @@ jinja2==3.1.1
     #   jinja2-time
 jinja2-time==0.2.0
     # via cookiecutter
-jsonschema==4.16.0
+jsonschema==4.17.0
     # via -r requirements.in
 markupsafe==2.1.1
     # via jinja2
@@ -107,7 +107,6 @@ text-unidecode==1.3
     # via python-slugify
 tomli==2.0.1
     # via
-    #   black
     #   coverage
     #   pytest
 urllib3==1.26.9
